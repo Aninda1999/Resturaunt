@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import DISHES from '../../Dish';
 import DishDtl from './DishDtl';
 import MenuItem from './MenuItem';

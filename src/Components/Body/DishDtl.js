@@ -1,8 +1,9 @@
 import React from 'react'
 import { Card, CardBody, CardImg, CardText, CardTitle } from 'reactstrap'
 import Loadcomments from './Loadcomments'
+import CommentForm from './CommentForm'
 
-const DishDtl = ({ dish }) => {
+const DishDtl = ({ dish, comments }) => {
     return (
         <div>  <Card className="my-2">
             <CardImg
@@ -24,8 +25,9 @@ const DishDtl = ({ dish }) => {
                     Bdt&nbsp;{dish.price}/-
                 </CardText>
                 <hr />
-                <Loadcomments comments={dish.comments} />
-
+                <Loadcomments comments={comments} />
+                <hr/>
+                <CommentForm dishId={props.dish.id} />
             </CardBody>
         </Card>
 

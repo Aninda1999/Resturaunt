@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 export class Home extends Component {
+
     render() {
+        document.title="Caboose's Bowl"
         return (
             <div>Home</div>
         )

@@ -27,7 +27,7 @@ const DishDtl = ({ dish, comments }) => {
                 <hr />
                 <Loadcomments comments={comments} />
                 <hr/>
-                <CommentForm dishId={props.dish.id} />
+                <CommentForm dishId={dish.id} />
             </CardBody>
         </Card>
 

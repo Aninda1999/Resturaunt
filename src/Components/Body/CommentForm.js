@@ -3,47 +3,56 @@ import {Form, Button, Input} from 'reactstrap'
 import { connect } from "react-redux";
 
 
+
+const mapDispatchToProps = dispatch=>{
+    return{
+        addComment: (dishId, rating, author, comment)=> dispatch({
+            type:'ADD_COMMENT',
+            payload:{
+                dishId: dishId,
+                author:author,
+                rating:rating,
+                comment: comment
+            }
+        })
+    }
+}
 class CommentForm extends Component{
     constructor(props){
         super(props);
         this.state={
-author:'',
-rating:'',
-comment:''
+        author:'',
+        rating:'',
+        comment:''
         }
-        this.handleInputChange= this.handleInputChange.bind(this)
-        this.handleSubmit= this.handleSubmit.bind(this)
+        this.handleInputChange= this.handleInputChange.bind(this);
+        this.handleSubmit= this.handleSubmit.bind(this);
     }
+
 handleInputChange = event =>{
     this.setState({
         [event.target.name]: event.target.value
     })
 }
 
-handleSubmit=event=>{
 
-    console.log("Handle Submit:", this.state);
+handleSubmit = event => {
+
    
-
-    this.props.dispatch({
-        type:'ADD_COMMENT',
-        payload:{
-            dishId: this.props.dishId,
-            author:this.state.author,
-            rating:this.state.rating,
-            comment: this.state.comment
-        }
-    })
+    this.props.addComment(this.props.dishId, this.state.rating, this.state.author, this.state.comment)
     this.setState({
         author:'',
         rating:'',
         comment:''
     })
+
+    event.preventDefault();
 }
 
 
 
 render(){
+    console.log(this.props);
     return(
         <div>
             <Form onSubmit={this.handleSubmit}>
@@ -54,7 +63,8 @@ render(){
                 onChange={this.handleInputChange}
                 required />
                 <br/>
-                <Input type="select"
+                <Input 
+                type="select"
                 name="rating"
                 value={this.state.rating}
                 onChange={this.handleInputChange}
@@ -66,11 +76,13 @@ render(){
                 <option>5</option>
                 </Input>
                 <br/>
-                <Input type="text"
+                <Input 
+                type="textarea"
                 name="comment"
                 value={this.state.comment}
                 onChange={this.handleInputChange}
                 placeholder="Write your comment"
+                required
                 />
 
                 <br/>
@@ -84,4 +96,4 @@ render(){
 
 }
 
-export default connect()(CommentForm);
+export default connect(null, mapDispatchToProps)(CommentForm);
